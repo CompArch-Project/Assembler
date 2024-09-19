@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
  */
 public class RegexTokenizer implements Tokenizer {
     private static final String TOKEN_PATTERN =
-            "(?<LABEL>[a-zA-Z_][a-zA-Z0-9_]*:?)|" + // label สามารถมี ":" ได้
-                    "(?<INSTRUCTION>lw|sw|beq|add|nop)|" +
+            "(?<LABEL>[a-zA-Z_][a-zA-Z0-9_]*:?)|" +
+                    "(?<INSTRUCTION>lw|sw|beq|add|nop|MOV|ADD|SUB|JMP|RET)|" +
                     "(?<REGISTER>\\d)|" +
                     "(?<IMMEDIATE>-?\\d+)|" +
+                    "(?<COMMA>,)|" + // เพิ่มส่วนนี้เพื่อจับคอมม่า
                     "(?<WHITESPACE>\\s+)|" +
                     "(?<UNKNOWN>.)";
+
 
     private static final Pattern pattern = Pattern.compile(TOKEN_PATTERN);
 
