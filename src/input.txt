@@ -1,0 +1,7 @@
+add 0 1 2
+nand 2 3 4
+lw 0 1 8
+sw 1 2 4
+beq 1 0 LABEL
+LABEL: noop
+.fill 10
