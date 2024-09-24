@@ -36,18 +36,3 @@ The Assembler Simulator is designed to read an input assembly file, convert it i
 [!NOTE]
 This assembler only works for the instructions listed above. Make sure your assembly code matches the supported format!
 
-## Directory Structure
-
-```bash
-Assembler-Simulator/
-│
-├── input/              # Folder for input assembly files
-├── output/             # Folder where output binary and decimal files are saved
-├── src/                # Source code for the Assembler Simulator
-│   ├── Assembler.java          # Core logic for the assembler
-│   ├── AssemblerTokenizer.java # Tokenizer for reading assembly files
-│   ├── FileOperator.java       # File I/O operations
-│   ├── Main.java               # Main entry point for the application
-│   ├── Tokenizer.java          # Tokenizer interface
-├── README.md            # Project documentation (this file)
-└── .gitignore           # Git ignore rules for the project

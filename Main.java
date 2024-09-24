@@ -11,7 +11,7 @@ public class Main {
      * outExtension[1] for file.txt
      */
     static String[] outExtension = {
-            ".bin", ".txt"
+            ".binary", ".decimal" ,".hex"
     };
 
     public static void main(String[] args) {
@@ -49,18 +49,20 @@ public class Main {
         String baseFileName = filePath.substring(filePath.lastIndexOf('/') + 1, filePath.lastIndexOf('.'));
 
         // Save files with new names
-       FileOperator.StringToFile(Output_path + baseFileName + "binary" + outExtension[0], binaryCodes);
-       FileOperator.StringToFile(Output_path + baseFileName + "decimal" + outExtension[1], decimalCodes);
-      //  FileOperator.StringToFile(Output_path + baseFileName  + outExtension[0], binaryCodes);
-      //  FileOperator.StringToFile(Output_path + baseFileName + outExtension[1], decimalCodes);
+      // FileOperator.StringToFile(Output_path + baseFileName + "binary" + outExtension[0], binaryCodes);
+      // FileOperator.StringToFile(Output_path + baseFileName + "decimal" + outExtension[1], decimalCodes);
+        FileOperator.StringToFile(Output_path + baseFileName  + outExtension[0], binaryCodes);
+        FileOperator.StringToFile(Output_path + baseFileName + outExtension[1], decimalCodes);
 
 
     }
 
     public static void print(String fileName, String fileExtension) {
         // Construct the output file names based on the specified requirements
-        String binaryFilePath = Output_path + fileName.substring(0, fileName.lastIndexOf('.')) + "binary" + outExtension[0];
-        String decimalFilePath = Output_path + fileName.substring(0, fileName.lastIndexOf('.')) + "decimal" + outExtension[1];
+      //  String binaryFilePath = Output_path + fileName.substring(0, fileName.lastIndexOf('.')) + "binary" + outExtension[0];
+        //String decimalFilePath = Output_path + fileName.substring(0, fileName.lastIndexOf('.')) + "decimal" + outExtension[1];
+        String binaryFilePath = Output_path + fileName.substring(0, fileName.lastIndexOf('.')) + outExtension[0];
+        String decimalFilePath = Output_path + fileName.substring(0, fileName.lastIndexOf('.')) + outExtension[1];
 
         System.out.println("\n");
 
