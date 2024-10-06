@@ -33,6 +33,5 @@ The Assembler Simulator is designed to read an input assembly file, convert it i
 - **File I/O Support**: Read assembly code from a file and output machine code to files.
 - **Error Handling**: Provides error checking and informative output for debugging issues in the assembly code.
 
-[!NOTE]
-This assembler only works for the instructions listed above. Make sure your assembly code matches the supported format!
+[!NOTE]This assembler only works for the instructions listed above. Make sure your assembly code matches the supported format!
 
