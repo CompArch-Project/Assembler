@@ -461,38 +461,7 @@ public class Assembler {
         return decimalList;
     }
 
-    /**
-     * แปลงทศนิยมเป็นบิต
-     *
-     * @param decimalList ลิสต์ของค่าทศนิยมที่ต้องการแปลง
-     * @return ลิสต์ของบิตที่ได้จากการแปลง
-     */
-    public static List<String> decimalToBinary(List<String> decimalList) {
-        List<String> binaryStrings = new ArrayList<>();
 
-        for (String decimal : decimalList) {
-            String binary;
-
-            if (decimal.startsWith("-")) {
-                String absoluteValue = decimal.substring(1); // ลบเครื่องหมายลบออก
-                BigInteger absoluteBigInt = new BigInteger(absoluteValue);
-                String binaryString = absoluteBigInt.toString(2);
-
-                // ทำ 2's complement กับค่าที่เป็นลบ
-                binary = twosCompliment(addZeroBits(binaryString, 32));
-            } else {
-                BigInteger positiveBigInt = new BigInteger(decimal);
-                binary = positiveBigInt.toString(2);
-
-                // เพิ่มเลขศูนย์ด้วย addZeroBits
-                binary = addZeroBits(binary, 32);
-            }
-
-            binaryStrings.add(binary);
-        }
-
-        return binaryStrings;
-    }
 
     /**
      * แปลงจำนวนเต็มเป็นสตริงของบิต
@@ -513,4 +482,17 @@ public class Assembler {
         System.out.println("exit (" + i + ") : ERROR!!!");
         System.exit(i);
     }
+    public static List<String> binaryToHex(List<String> binaryList) {
+        List<String> hexList = new ArrayList<>();
+
+        for (String binaryString : binaryList) {
+            BigInteger binaryValue = new BigInteger(binaryString, 2);
+            String hexString = "0x" + binaryValue.toString(16);  // Convert to hex and prepend 0x
+            hexList.add(hexString);
+        }
+
+        return hexList;
+    }
+
+
 }
