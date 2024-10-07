@@ -1,0 +1,17 @@
+          lw       0        1        mcand     load reg1 with mcand
+          lw       0        2        mplier    load reg2 with mplier
+          lw       0        3        zero      load reg3 with 0 (result register)
+          lw       0        4        neg1      load reg4 with -1 for decrease
+start     beq      0        2        done      if reg2 is 0, finish multiplication
+          add      3        1        3         add reg1 to reg3 (result += num1)
+          add      2        4        2         decrement reg2
+          beq      0        0        start     loop back to continue multiplying
+done      add      0        3        1         write final result (from reg3) to reg1
+          lw       0        5        result    load result into reg5 for printing
+          sw       0        5        0         print the result (output to memory-mapped I/O)
+          halt                                 end the program
+zero      .fill     0                          store 0
+neg1      .fill    -1                          store -1 for decrease
+mcand     .fill     6                          store mcand value (In this case, used 6)
+mplier    .fill     7                          store mplier value (In this case, used 7)
+result    .fill     0                          store initial result
