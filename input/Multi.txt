@@ -1,17 +1,23 @@
-          lw       0        1        mcand     load reg1 with mcand
-          lw       0        2        mplier    load reg2 with mplier
-          lw       0        3        zero      load reg3 with 0 (result register)
-          lw       0        4        neg1      load reg4 with -1 for decrease
-start     beq      0        2        done      if reg2 is 0, finish multiplication
-          add      3        1        3         add reg1 to reg3 (result += num1)
-          add      2        4        2         decrement reg2
-          beq      0        0        start     loop back to continue multiplying
-done      add      0        3        1         write final result (from reg3) to reg1
-          lw       0        5        result    load result into reg5 for printing
-          sw       0        5        0         print the result (output to memory-mapped I/O)
-          halt                                 end the program
-zero      .fill     0                          store 0
-neg1      .fill    -1                          store -1 for decrease
-mcand     .fill     6                          store mcand value (In this case, used 6)
-mplier    .fill     7                          store mplier value (In this case, used 7)
-result    .fill     0                          store initial result
+        lw      0       1       zero        load reg1 with 0 (used as result)
+        lw      0       2       mplier      load reg2 with mplier (multiplier)
+        lw      0       3       maxbit      load reg3 with 16 (used as counter)
+        lw      0       4       nega        load reg4 with -1 (used for decreasion)
+        lw      0       5       one         load reg5 with 1 (used as temporary memory)
+        lw      0       6       one         load reg6 with 1 (used as mplierlocator)
+        lw      0       7       mcand       load reg7 with mcand (used as ShiftMcand)
+start   beq     0       3       done        if counter (reg3) reached 0, finish multiplication
+        nand    2       6       5           reg5 = ~(mplier & mplierlocator) (check if wanted bit of mplier is 0 or 1)
+        nand    5       5       5           reg5 = ~(reg5 & reg5)
+        beq     0       5       skip        if reg5 is 0 (focused mplier bit is 0), skip addition and move to next bit
+        add     1       7       1           add mcand(or shifted one) to result (result += shiftedmcand)
+skip    add     7       7       7           shift reg7 left (Shifted Mcand *= 2)
+        add     6       6       6           shift mplier locator (locator *= 2)
+        add     3       4       3           Decrease counter by 1
+        beq     0       0       start       go back to start and continue the loop
+done    halt                                end of program
+zero    .fill   0                           store 0
+one     .fill   1                           store 1
+nega    .fill   -1                          store -1
+maxbit  .fill   16                          store 16(Maximum bit possible)
+mcand   .fill   32766                       store mcand value (In this case, used X)
+mplier  .fill   10383                       store mplier value (In this case, used Y)
