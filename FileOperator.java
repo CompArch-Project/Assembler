@@ -43,8 +43,10 @@ public class FileOperator { // สำหรับการอ่านและ�
             data.append(" \n ");
             reader.close(); // ปิด reader หลังอ่านเสร็จ
         } catch (FileNotFoundException e) { // ตรวจจับกรณีที่ไฟล์ไม่พบ
-            System.out.println("FILE NOT FOUND!!!");
+            System.out.println("FILE NOT FOUND!!! Exiting program.");
+            System.exit(1);  // ออกจากโปรแกรมเมื่อไม่พบไฟล์
         }
         return data.toString(); // คืนค่าข้อมูลที่อ่านมา
     }
+
 }

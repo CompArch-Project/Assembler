@@ -1,0 +1,33 @@
+n       .fill   7            # ค่าของ n
+r       .fill   3            # ค่าของ r
+result  .fill   0            # ที่เก็บผลลัพธ์
+stack   .fill   0            # เริ่มต้น stack (ไม่สนใจค่า)
+pos1    .fill   1            # ค่าที่จะใช้เพิ่ม stack pointer
+neg1    .fill   -1           # ค่าที่ใช้ลด stack pointer
+        lw      0       1       n       # โหลดค่า n ลงใน register 1
+        lw      0       2       r       # โหลดค่า r ลงใน register 2
+        jalr    3       4       Callcombi  # เรียกฟังก์ชัน combination
+        sw      0       3       result   # เก็บผลลัพธ์ที่ได้ใน result
+        halt                    # จบโปรแกรม
+        sw      7       4       stack      # เก็บ return address ลง stack
+        add     7       5       7          # เพิ่ม stack pointer
+             beq     2       0       skipcalculation  # ถ้า r เป็น 0 ให้ข้ามไปยังบรรทัดที่ระบุ
+             beq     1       2       skipcalculation  # ถ้า n เท่ากับ r ให้ข้ามไปยังบรรทัดที่ระบุ
+        lw      0       6       neg1      # โหลดค่า -1 เข้า reg 6
+        add     1       6       1          # n = n - 1 (ใช้คำสั่ง add แทน addi)
+        jalr    3       4       Callcombi # เรียก combination(n-1, r)
+        add     7       5       7          # เพิ่ม stack pointer
+        sw      7       1       stack      # เก็บค่า result ใน stack
+        lw      7       1       stack      # โหลดค่า combination(n-1, r) จาก stack
+        lw      0       1       n          # โหลดค่า n ลงใน register 1
+        lw      0       2       r          # โหลดค่า r ลงใน register 2
+        lw      0       6       neg1      # โหลดค่า -1 เข้า reg 6
+        add     2       6       2          # r = r - 1 (ใช้คำสั่ง add แทน addi)
+        jalr    3       4       Callcombi  # เรียกฟังก์ชัน combination(n-1, r-1)
+        add     7       1       7          # รวมผลลัพธ์
+        sw      0       3       stack      # เก็บผลลัพธ์สุดท้ายใน stack
+        lw      0       3       pos1       # คืนค่า 1
+        add     7       4       7          # ฟื้นคืน stack pointer
+        lw      7       4       stack      # โหลด return address
+        jalr    4       2                   # คืนค่าจากฟังก์ชัน
+        skipcalculation  jalr    4       2       # คืนค่าจากฟังก์ชันหาก n เท่ากับ r หรือ r เท่ากับ 0

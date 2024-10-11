@@ -105,8 +105,8 @@ public class Assembler {
         }
 
         if (TestTool) {
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("parsed! -> " + Data_list);
+            System.out.println("\n[Parsing Line] Tokens -> " + Data_list);
+            System.out.println("--------------------------------------------------");
         }
     }
 
@@ -167,9 +167,11 @@ public class Assembler {
             String opcode = getOpcode(instruction);
 
             if (TestTool) {
-                System.out.println("Instruction : " + instruction);
-                System.out.println("Type : " + type);
-                System.out.println("Opcode : " + opcode);
+                System.out.println("\n=== Instruction Details ===");
+                System.out.println("Instruction: " + instruction);
+                System.out.println("Type       : " + type);
+                System.out.println("Opcode     : " + opcode);
+                System.out.println("----------------------------");
             }
 
             // กำหนดค่าพื้นฐาน
@@ -373,9 +375,19 @@ public class Assembler {
             if (Data_list.isEmpty()) {
                 parseLineToData();
             }
-            if (!isInstruction(Data_list.get(0))) {
-                if (LabelValidCheck(Data_list.get(0))) {
-                    Label_Mapping.put(Data_list.get(0), pointer);
+            String label = Data_list.get(0);
+
+            // ถ้า label ลงท้ายด้วย ":" ให้ตัด ":" ออกก่อนทำ mapping
+            if (label.endsWith(":")) {
+                label = label.substring(0, label.length() - 1); // เอา ":" ออก
+            }
+
+            if (!isInstruction(label)) {
+                if (LabelValidCheck(label)) {
+                    Label_Mapping.put(label, pointer);
+                    if (TestTool) {
+                        System.out.println("[Label Mapped] " + label + " -> " + pointer);
+                    }
                 } else {
                     System.out.println("First index is not Label or instruction");
                     exit(1);
@@ -384,7 +396,14 @@ public class Assembler {
             pointer++;
             parseLineToData();
         }
+
+        if (TestTool) {
+            System.out.println("[Label Mapping Complete]");
+            System.out.println("Labels: " + Label_Mapping);
+            System.out.println("--------------------------------------------------");
+        }
     }
+
 
     /**
      * ตรวจสอบว่าสตริงเป็น label หรือไม่
