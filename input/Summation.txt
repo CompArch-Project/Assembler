@@ -1,0 +1,16 @@
+        lw    0   7   n   
+        lw    0   2   i     
+        lw    0   6   nega     
+        lw    0   1   zero     
+        lw    0   3   one 
+        add   2   6   2             
+loop    beq   7   2   done     
+        add   1   7   1            
+        add   7   6   7        
+        beq   0   0   loop      
+done    halt                  
+n       .fill   11              ค่าเริ่มต้นของ n
+i       .fill   2
+zero    .fill   0               
+one     .fill   1               
+nega    .fill   -1              

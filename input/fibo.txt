@@ -9,7 +9,7 @@ loop    beq   7   0   done      ถ้า nที่reg7 == 0 ให้ไปท
         add   4   0   3         reg3 = reg4 (อัพเดตค่า Fibonacci ปัจจุบัน)
         beq   0   0   loop      ตรวจเเล้วลูป
 done    halt                    หยุดการทำงาน
-n       .fill   10              ค่าเริ่มต้นของ n
+n       .fill   25              ค่าเริ่มต้นของ n
 zero    .fill   0              
 one     .fill   1               
 nega    .fill   -1              
