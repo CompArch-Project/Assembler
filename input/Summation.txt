@@ -10,7 +10,7 @@ loop    beq   7   2   done
         beq   0   0   loop      
 done    halt                  
 n       .fill   11              ค่าเริ่มต้นของ n
-i       .fill   2
+i       .fill   2               ค่าเริ่มต้นของ i
 zero    .fill   0               
 one     .fill   1               
 nega    .fill   -1              

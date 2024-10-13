@@ -1,12 +1,12 @@
         lw    0   7   n         ใส่nลงreg7
         lw    0   6   nega      ใส่nega (-1) ลงใน reg6
-        lw    0   2   zero      reg2 = 0 (ค่าเริ่มต้นสำหรับ Fibonacci)
+        lw    0   1   zero      reg2 = 0 (ค่าเริ่มต้นสำหรับ Fibonacci)
         lw    0   3   one       reg3 = 1 (ค่าเริ่มต้นสำหรับ Fibonacci)
 loop    beq   7   0   done      ถ้า nที่reg7 == 0 ให้ไปที่ done
         add   7   6   7         reg7 -= 1
         add   1   3   4         reg4 = reg1 + reg3 (คำนวณ Fibonacci)
-        add   3   0   1         reg1 = reg3 (อัพเดตค่า Fibonacci ก่อนหน้า)
-        add   4   0   3         reg3 = reg4 (อัพเดตค่า Fibonacci ปัจจุบัน)
+        add   3   0   1         reg1 = reg3 (อัพเดตค่า Fibonacci ปัจจุบัน)
+        add   4   0   3         reg3 = reg4 (อัพเดตค่า Fibonacci ที่จะเอาไปใช้ต่อ)
         beq   0   0   loop      ตรวจเเล้วลูป
 done    halt                    หยุดการทำงาน
 n       .fill   25              ค่าเริ่มต้นของ n
